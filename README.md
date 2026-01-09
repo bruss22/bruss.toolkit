@@ -26,7 +26,7 @@ The toolkit is intentionally simple and predictable, making it well-suited for *
 
 ## Requirements
 
-- Python **3.8+**
+- Python **3.9+**
 - Required Python package:
 
 ```bash
