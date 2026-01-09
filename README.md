@@ -1,6 +1,6 @@
 # bruss.toolkit
 
-![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![Python](https://img.shields.io/badge/python-3.9%2B-blue)
 ![Status](https://img.shields.io/badge/status-lab%20tool-orange)
 ![Use Case](https://img.shields.io/badge/use%20case-SD--WAN%20%7C%20DPI%20%7C%20WebFilter-green)
 
