@@ -1,48 +1,54 @@
-bruss.toolkit
+# bruss.toolkit
 
-bruss.toolkit is a lightweight Python toolkit used to generate controlled web traffic for validating:
-	•	Web filtering policies
-	•	Application steering (SD-WAN / SASE)
-	•	SSL/TLS Deep Packet Inspection (DPI)
+![Python](https://img.shields.io/badge/python-3.8%2B-blue)
+![Status](https://img.shields.io/badge/status-lab%20tool-orange)
+![Use Case](https://img.shields.io/badge/use%20case-SD--WAN%20%7C%20DPI%20%7C%20WebFilter-green)
 
-It is designed for lab and POC environments where deterministic, repeatable HTTP/HTTPS traffic is required.
+`bruss.toolkit` is a lightweight Python utility designed to generate **deterministic HTTP/HTTPS web traffic** for validating:
 
-⸻
+- Web filtering policies
+- Application steering (SD-WAN / SASE)
+- SSL/TLS Deep Packet Inspection (DPI)
 
-Use Cases
-	•	Validate FortiGate web filtering behavior
-	•	Test application steering across WAN paths
-	•	Generate HTTPS traffic that is inspectable via DPI
-	•	Create repeatable traffic patterns for demos and POCs
+The toolkit is intentionally simple and predictable, making it well-suited for **FortiGate labs, POCs, demos, and validation testing**.
 
-⸻
+---
 
-Requirements
-	•	Python 3.8+
-	•	Internet access (or routed lab access)
-	•	Optional: CA certificate used by the firewall for DPI
+## Key Features
 
-Python dependencies:
+- Randomized URL selection from a CSV file
+- Controlled request pacing (default: 1 request/second)
+- HTTPS traffic compatible with **SSL/TLS DPI via custom CA certificates**
+- Clear request feedback (status, reason, latency)
+- Graceful shutdown using `Ctrl+C`
 
+---
+
+## Requirements
+
+- Python **3.8+**
+- Required Python package:
+
+```bash
 pip install requests
 
 
 ⸻
 
-Repository Structure
+Repository Layout
 
 bruss.toolkit/
-├── main.py           # Traffic generation script
-├── urllist.csv       # List of URLs to generate traffic against
-├── README.md
-└── certs/            # (Optional) DPI CA certificates
+├── main.py                 # Core request logic (tkit class)
+├── toolkit_v3_distro.py    # Traffic generation driver
+├── urllist.csv             # URLs used to generate traffic
+└── README.md
 
 
 ⸻
 
 URL List Configuration
 
-Populate urllist.csv with the URLs you want to generate traffic for.
+Populate urllist.csv with the destinations you want to generate traffic toward.
 
 Example urllist.csv
 
@@ -51,9 +57,11 @@ https://www.facebook.com
 https://www.youtube.com
 https://www.github.com
 
+Parsing Rules
 	•	One URL per line
-	•	HTTPS and HTTP are both supported
-	•	DNS resolution and TLS negotiation occur naturally
+	•	Blank lines are ignored
+	•	Optional headers (url, urls) are skipped automatically
+	•	HTTP and HTTPS are both supported
 
 ⸻
 
@@ -61,75 +69,111 @@ Running the Toolkit
 
 From the project directory:
 
-python main.py
+python toolkit_v3_distro.py
 
-By default:
-	•	Each URL is requested sequentially
-	•	A 1-second delay is applied between requests
-	•	Requests time out after 12 seconds
+When prompted:
 
-⸻
+Press 1 to generate traffic:
 
-Deep Packet Inspection (DPI)
+Press 1 to begin generating traffic.
 
-If your firewall performs SSL/TLS inspection, you can validate DPI behavior by providing the CA certificate used by the firewall.
+Example Output
 
-Steps
-	1.	Place the CA certificate in the project directory (or a subfolder).
-	2.	Update the requests.get() call in main.py to reference the certificate.
+Trying https://www.google.com Result: 200 OK (143ms)
+Trying https://www.youtube.com Result: 200 OK (231ms)
 
-Example
-
-# Enable DPI by validating against the firewall CA certificate
-response = requests.get(
-    url[0],
-    verify='/path/to/toolkit/certname.cer',
-    timeout=12
-)
-
-Notes
-	•	This does NOT disable TLS verification
-	•	The certificate should be the same CA installed on client systems
-	•	verify=False is strongly discouraged
+Stop execution at any time using Ctrl+C.
 
 ⸻
 
-Timing and Rate Control
-
-The toolkit includes a built-in delay to avoid overwhelming targets or lab devices.
-
-Default:
-
-time.sleep(1)
-
-You may adjust this value to:
-	•	Increase request rate
-	•	Simulate more realistic user behavior
-	•	Match lab throughput requirements
+Default Runtime Behavior
+	•	URLs are selected randomly from urllist.csv
+	•	One request is sent every 1 second
+	•	Request timeout is 6 seconds
+	•	HTTP redirects are followed
+	•	TLS certificate verification is enabled by default
 
 ⸻
 
-Best Practices
-	•	Use lab or test environments only
-	•	Ensure target URLs allow automated requests
-	•	Avoid excessive request rates to public services
-	•	Log traffic on the firewall to validate classification and steering
+SSL/TLS Deep Packet Inspection (DPI)
+
+To validate DPI behavior, configure the toolkit to trust the same CA certificate used by the firewall performing inspection.
+
+Configuration Steps
+	1.	Copy the firewall DPI CA certificate to the system running the toolkit
+	2.	Edit toolkit_v3_distro.py and set the certificate path:
+
+ca_cert = "/home/fortinet/toolkit/FGTSPI.cer"
+
+	3.	Ensure TLS verification is enabled:
+
+insecure = False
+
+The toolkit will now establish TLS sessions that are fully inspectable by the firewall while maintaining certificate trust.
+
+⸻
+
+Insecure Mode (Lab Only)
+
+For quick validation where certificate trust is not required:
+
+insecure = True
+
+⚠️ Warning:
+This disables TLS certificate validation and should only be used in isolated lab environments.
+
+⸻
+
+Tuning Request Rate and Timeouts
+
+Within toolkit_v3_distro.py:
+
+sleep_seconds = 1      # Delay between requests
+timeout_seconds = 6    # Per-request timeout
+
+Adjust these values to match lab scale, inspection capacity, or demo timing requirements.
+
+⸻
+
+Output Details
+
+Each request reports:
+	•	URL
+	•	HTTP status code
+	•	Response reason (if available)
+	•	Request latency (milliseconds)
+
+Error output may include:
+	•	Timeout
+	•	SSL/TLS validation errors
+	•	General request failures
+
+⸻
+
+Intended Use Cases
+	•	FortiGate web filtering validation
+	•	SD-WAN application steering testing
+	•	SSL/TLS DPI inspection verification
+	•	SASE / ZTNA demo traffic generation
+	•	Lab and POC environments
 
 ⸻
 
 Known Limitations
 	•	Single-threaded execution
 	•	No retry or backoff logic
-	•	No result logging (status codes, latency, etc.)
+	•	No persistent logging to disk
+	•	No command-line arguments (values set in code)
 
-These are intentional to keep the toolkit simple and predictable.
+These limitations are intentional to preserve clarity, predictability, and transparency.
 
 ⸻
 
-Roadmap (Planned Enhancements)
-	•	Command-line arguments (URL file, sleep, timeout, cert path)
-	•	Result logging (CSV / JSON)
-	•	Retry and error handling
+Roadmap (Optional Enhancements)
+	•	Command-line argument support
+	•	CSV / JSON request logging
+	•	Retry and backoff logic
+	•	URL weighting
 	•	Optional concurrency
 	•	Docker container support
 
@@ -137,11 +181,12 @@ Roadmap (Planned Enhancements)
 
 Disclaimer
 
-This tool is intended for testing, validation, and educational purposes only.
+This tool is provided for testing and educational purposes only.
 Do not use it to generate abusive, excessive, or unauthorized traffic.
 
 ⸻
 
 Author
 
-Created and maintained by bruss22
+Maintained by bruss22
+
