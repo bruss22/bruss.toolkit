@@ -1,7 +1,3 @@
-Absolutely — below is a clean, professional, drop-in README you can copy directly into your repo. It’s written for network/security engineers, lab testing, and FortiGate/SDWAN use cases, with clear setup, options, and guardrails.
-
-⸻
-
 bruss.toolkit
 
 bruss.toolkit is a lightweight Python toolkit used to generate controlled web traffic for validating:
@@ -149,13 +145,3 @@ Do not use it to generate abusive, excessive, or unauthorized traffic.
 Author
 
 Created and maintained by bruss22
-
-⸻
-
-If you want, I can:
-	•	Rewrite this README to be Fortinet-branded
-	•	Add a Quickstart diagram
-	•	Convert this into a README.md + examples/ structure
-	•	Or refactor main.py to match what the README describes
-
-Just say the word.
