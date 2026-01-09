@@ -12,7 +12,6 @@ class tkit:
             #first line is for DPI with cert referenced in folder used by FGT for DPI
             #response = requests.get(url[0], verify='/home/fortinet/toolkit/FGTSPI.cer',timeout=12)
             response = requests.get(url[0], verify=False,timeout=6)
-            #print(f'Trying - {row[0]}: Result - {response.status_code}')
             return response
         except requests.exceptions.ReadTimeout:
             return (f'Trying - {url[0]}: Result - Timeout')
