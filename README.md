@@ -48,7 +48,7 @@ bruss.toolkit/
 
 URL List Configuration
 
-Populate urllist.csv with the destinations you want to generate traffic toward.
+Populate urllist.csv with the destinations you want to generate traffic toward. I would reccomend seperate Application Steering(SDWAN) and Web FIlter lists.
 
 Example urllist.csv
 
@@ -100,16 +100,20 @@ SSL/TLS Deep Packet Inspection (DPI)
 To validate DPI behavior, configure the toolkit to trust the same CA certificate used by the firewall performing inspection.
 
 Configuration Steps
-	1.	Copy the firewall DPI CA certificate to the system running the toolkit
+	1.	Copy the firewall DPI CA certificate to the system running the toolkit. Tested on Ubuntu 24.04.3
 	2.	Edit toolkit.py and set the certificate path:
 
-ca_cert = "/home/fortinet/toolkit/FGTSPI.cer"
+ca_cert = "/home/fortinet/toolkit/FGTDPI.cer"
 
 	3.	Ensure TLS verification is enabled:
 
 insecure = False
 
 The toolkit will now establish TLS sessions that are fully inspectable by the firewall while maintaining certificate trust.
+
+verify DPI
+openssl s_client -connect www.yahoo.com:443 -servername www.yahoo.com -CAfile FGTDPI.cer -verify_return_error </dev/null
+
 
 ⸻
 
