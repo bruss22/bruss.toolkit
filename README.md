@@ -28,13 +28,11 @@ The toolkit is intentionally simple and predictable, making it well-suited for *
 
 - Python **3.9+**
 - Required Python package:
-
-```bash
-pip install requests
+	- pip install requests
 
 
 ⸻
-
+```
 Repository Layout
 
 bruss.toolkit/
@@ -110,8 +108,9 @@ insecure = False
 The toolkit will now establish TLS sessions that are fully inspectable by the firewall while maintaining certificate trust.
 
 verify DPI
-openssl s_client -connect www.yahoo.com:443 -servername www.yahoo.com -CAfile FGTDPI.cer -verify_return_error </dev/null
-
+```
+```openssl s_client -connect www.yahoo.com:443 -servername www.yahoo.com -CAfile FGTDPI.cer -verify_return_error </dev/null```
+```
 CONNECTED(00000003)
 depth=1 C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, **CN = FG121GTK23000612**, emailAddress = support@fortinet.com
 verify return:1
@@ -200,4 +199,4 @@ Do not use it to generate abusive, excessive, or unauthorized traffic.
 ⸻
 
 Maintained by bruss22
-
+```
