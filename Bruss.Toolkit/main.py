@@ -2,7 +2,6 @@
 import time
 from os.path import exists
 from typing import Optional
-
 import requests
 import urllib3
 
