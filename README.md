@@ -39,7 +39,7 @@ Repository Layout
 
 bruss.toolkit/
 ├── main.py                 # Core request logic (tkit class)
-├── toolkit.py    # Traffic generation driver
+├── toolkit.py    			# Traffic generation driver
 ├── urllist.csv             # URLs used to generate traffic
 └── README.md
 
@@ -101,7 +101,7 @@ To validate DPI behavior, configure the toolkit to trust the same CA certificate
 
 Configuration Steps
 	1.	Copy the firewall DPI CA certificate to the system running the toolkit
-	2.	Edit toolkit_v3_distro.py and set the certificate path:
+	2.	Edit toolkit.py and set the certificate path:
 
 ca_cert = "/home/fortinet/toolkit/FGTSPI.cer"
 
@@ -185,8 +185,6 @@ This tool is provided for testing and educational purposes only.
 Do not use it to generate abusive, excessive, or unauthorized traffic.
 
 ⸻
-
-Author
 
 Maintained by bruss22
 
