@@ -113,14 +113,14 @@ verify DPI
 openssl s_client -connect www.yahoo.com:443 -servername www.yahoo.com -CAfile FGTDPI.cer -verify_return_error </dev/null
 
 CONNECTED(00000003)
-depth=1 C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, **CN = FG121GTK23000612**, emailAddress = support@fortinet.com
+depth=1 C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, **CN = `FG121GTK23000612`, emailAddress = support@fortinet.com
 verify return:1
 depth=0 C = US, ST = New York, L = New York, O = Yahoo Holdings Inc., CN = *.yahoo.com
 verify return:1
 ---
 Certificate chain
  0 s:C = US, ST = New York, L = New York, O = Yahoo Holdings Inc., CN = *.yahoo.com
-   i:C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, **CN = FG121GTK23000612**, emailAddress = support@fortinet.com
+   i:C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, **CN = `FG121GTK23000612`, emailAddress = support@fortinet.com
    a:PKEY: id-ecPublicKey, 256 (bit); sigalg: RSA-SHA256
    v:NotBefore: Dec  3 00:00:00 2025 GMT; NotAfter: Jan 21 23:59:59 2026 GMT
 
