@@ -39,7 +39,7 @@ Repository Layout
 
 bruss.toolkit/
 ├── main.py                 # Core request logic (tkit class)
-├── toolkit_v3_distro.py    # Traffic generation driver
+├── toolkit.py    # Traffic generation driver
 ├── urllist.csv             # URLs used to generate traffic
 └── README.md
 
@@ -69,7 +69,7 @@ Running the Toolkit
 
 From the project directory:
 
-python toolkit_v3_distro.py
+python toolkit.py
 
 When prompted:
 
