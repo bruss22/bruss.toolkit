@@ -69,11 +69,9 @@ Running the Toolkit
 
 From the project directory:
 
-python toolkit.py
+python3 toolkit.py
 
-When prompted:
-
-Press 1 to generate traffic:
+When prompted with "Press 1 to generate traffic:"
 
 Press 1 to begin generating traffic.
 
