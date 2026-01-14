@@ -98,11 +98,10 @@ To validate DPI behavior, configure the toolkit to trust the same CA certificate
 Configuration Steps
 	1.	Copy the firewall DPI CA certificate to the system running the toolkit. Tested on Ubuntu 24.04.3
 	2.	Edit toolkit.py and set the certificate path:
+	3.	Ensure TLS verification is enabled:
 
 ca_cert = "/home/fortinet/bruss.toolkit/Bruss.Toolkit/FGTDPI.cer"
 #ca_cert = None
-	3.	Ensure TLS verification is enabled:
-
 insecure = False
 
 You can paste the contents of your cert into the FGTDPI.cer or upload your cert to the correct location.
@@ -130,11 +129,10 @@ Certificate chain
 Insecure Mode (Lab Only)
 
 For quick validation where certificate trust is not required:
-
+#ca_cert = "/home/fortinet/bruss.toolkit/Bruss.Toolkit/FGTDPI.cer"
+ca_cert = None
 insecure = True
 
-⚠️ Warning:
-This disables TLS certificate validation and should only be used in isolated lab environments.
 
 ⸻
 
