@@ -57,7 +57,7 @@ class tkit:
                 headers=headers,
                 allow_redirects=True,
             )
-            elapsed_ms = int((time.time() - start) * 1000)
+            elapsed_ms = int(resp.elapsed.total_seconds() * 1000)
             return {
                 "url": url,
                 "ok": True,
