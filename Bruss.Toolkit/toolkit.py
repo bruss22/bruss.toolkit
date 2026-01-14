@@ -49,11 +49,11 @@ def main():
     timeout_seconds = 6
 
     # DPI example:
-    # ca_cert = "/home/fortinet/toolkit/FGTSPI.cer"
+    # ca_cert = "/home/fortinet/toolkit/FGTDPI.cer"
     ca_cert = None
 
     # Lab-only:
-    insecure = False
+    insecure = True
 
     while True:
         try:
