@@ -99,11 +99,13 @@ Configuration Steps
 	1.	Copy the firewall DPI CA certificate to the system running the toolkit. Tested on Ubuntu 24.04.3
 	2.	Edit toolkit.py and set the certificate path:
 
-ca_cert = "/home/fortinet/toolkit/FGTDPI.cer"
-
+ca_cert = "/home/fortinet/bruss.toolkit/Bruss.Toolkit/FGTDPI.cer"
+#ca_cert = None
 	3.	Ensure TLS verification is enabled:
 
 insecure = False
+
+You can paste the contents of your cert into the FGTDPI.cer or upload your cert to the correct location.
 
 The toolkit will now establish TLS sessions that are fully inspectable by the firewall while maintaining certificate trust.
 
