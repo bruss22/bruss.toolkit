@@ -39,6 +39,7 @@ bruss.toolkit/
 ├── main.py                 # Core request logic (tkit class)
 ├── toolkit.py    			# Traffic generation driver
 ├── urllist.csv             # URLs used to generate traffic
+├── quickstart.md
 └── README.md
 
 
@@ -65,89 +66,16 @@ Parsing Rules
 
 Running the Toolkit
 
-From the project directory:
-
-python3 toolkit.py
-
-When prompted with "Press 1 to generate traffic:"
-
-Press 1 to begin generating traffic.
-
-Example Output
-
-Trying https://www.google.com Result: 200 OK (143ms)
-Trying https://www.youtube.com Result: 200 OK (231ms)
-
-**Stop execution at any time using Ctrl+C**
-
+See quickstart.md
 ⸻
 
 Default Runtime Behavior
+	•	insecure = True
+	•	ca_cert = None
 	•	URLs are selected randomly from urllist.csv
 	•	One request is sent every 1 second
 	•	Request timeout is 6 seconds
 	•	HTTP redirects are followed
-	•	TLS certificate verification is enabled by default
-
-⸻
-
-SSL/TLS Deep Packet Inspection (DPI)
-
-To validate DPI behavior, configure the toolkit to trust the same CA certificate used by the firewall performing inspection.
-
-Configuration Steps
-	1.	Copy the firewall DPI CA certificate to the system running the toolkit. Tested on Ubuntu 24.04.3
-	2.	Edit toolkit.py and set the certificate path:
-	3.	Ensure TLS verification is enabled:
-
-ca_cert = "/home/fortinet/bruss.toolkit/Bruss.Toolkit/FGTDPI.cer"
-#ca_cert = None
-insecure = False
-
-You can paste the contents of your cert into the FGTDPI.cer or upload your cert to the correct location.
-
-The toolkit will now establish TLS sessions that are fully inspectable by the firewall while maintaining certificate trust.
-
-verify Strict DPI ie.. no exceptions  in sec profile
-
-```see issuer
-
-openssl s_client -connect example.com:443 -servername example.com </dev/null 2>/dev/null \
-| openssl x509 -noout -issuer -subject
-```
-issuer=C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, CN = FG121GTK23000612, emailAddress = support@fortinet.com
-subject=CN = example.com
-```
-```openssl s_client -connect www.yahoo.com:443 -servername www.yahoo.com -CAfile FGTDPI.cer -verify_return_error </dev/null```
-```
-CONNECTED(00000003)
-depth=1 C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, **CN = FG121GTK23000612**, emailAddress = support@fortinet.com
-verify return:1
-depth=0 C = US, ST = New York, L = New York, O = Yahoo Holdings Inc., CN = *.yahoo.com
-verify return:1
----
-Certificate chain
- 0 s:C = US, ST = New York, L = New York, O = Yahoo Holdings Inc., CN = *.yahoo.com
-   i:C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, **CN = FG121GTK23000612**, emailAddress = support@fortinet.com
-   a:PKEY: id-ecPublicKey, 256 (bit); sigalg: RSA-SHA256
-   v:NotBefore: Dec  3 00:00:00 2025 GMT; NotAfter: Jan 21 23:59:59 2026 GMT
-
-If DPI exceptions exist 
-for Ubuntu 24.04.3 LTS
-sudo cp FGTDPI.cer /usr/local/share/ca-certificates/FGTDPI.crt
-sudo update-ca-certificates
-Updating certificates in /etc/ssl/certs...
-1 added, 0 removed; done.
-
-⸻
-
-Insecure Mode (Lab Only)
-
-For quick validation where certificate trust is not required:
-#ca_cert = "/home/fortinet/bruss.toolkit/Bruss.Toolkit/FGTDPI.cer"
-ca_cert = None
-insecure = True
-
 
 ⸻
 
