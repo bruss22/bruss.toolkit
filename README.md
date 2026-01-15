@@ -108,15 +108,10 @@ You can paste the contents of your cert into the FGTDPI.cer or upload your cert 
 
 The toolkit will now establish TLS sessions that are fully inspectable by the firewall while maintaining certificate trust.
 
-for Ubuntu 24.04.3 LTS
-sudo cp FGTDPI.cer /usr/local/share/ca-certificates/FGTDPI.crt
-sudo update-ca-certificates
-Updating certificates in /etc/ssl/certs...
-1 added, 0 removed; done.
+verify Strict DPI ie.. no exceptions  in sec profile
 
-verify DPI
-see issuer
-```
+```see issuer
+
 openssl s_client -connect example.com:443 -servername example.com </dev/null 2>/dev/null \
 | openssl x509 -noout -issuer -subject
 ```
@@ -136,6 +131,13 @@ Certificate chain
    i:C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, **CN = FG121GTK23000612**, emailAddress = support@fortinet.com
    a:PKEY: id-ecPublicKey, 256 (bit); sigalg: RSA-SHA256
    v:NotBefore: Dec  3 00:00:00 2025 GMT; NotAfter: Jan 21 23:59:59 2026 GMT
+
+If DPI exceptions exist 
+for Ubuntu 24.04.3 LTS
+sudo cp FGTDPI.cer /usr/local/share/ca-certificates/FGTDPI.crt
+sudo update-ca-certificates
+Updating certificates in /etc/ssl/certs...
+1 added, 0 removed; done.
 
 ⸻
 
