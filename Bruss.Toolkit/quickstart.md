@@ -10,10 +10,10 @@ By default, the toolkit is configured for **quick testing** and **ease of use**.
 
 The toolkit ships with the following defaults:
 
-
+```
 ca_cert = None
 insecure = True
-
+```
 This means:
 	•	TLS certificate verification is disabled
 	•	HTTPS requests will succeed regardless of SSL inspection or certificate trust
@@ -42,12 +42,14 @@ https://www.yahoo.com
 https://example.com
 ```
 Run the toolkit:
-
-    python3 toolkit.py
-	Press 1 to generate traffic: 1
-    Checking for urllist.csv
-    Loaded 31 URLs. Press Ctrl+C to stop.
-
+```
+python3 toolkit.py
+Press 1 to generate traffic: 1
+Checking for urllist.csv
+Loaded 31 URLs. Press Ctrl+C to stop.
+Trying https://x.com Result: 200 OK (169ms)
+Trying https://yahoo.com Result: 200 OK (628ms)
+```
 Traffic will be generated using HTTPS requests with certificate validation disabled.
 
 ⸻
@@ -69,10 +71,10 @@ Step 2 — Choose a Trust Mode
 
 Option A — No DPI Exceptions (Strict DPI-Only Mode)
 Use this only if all HTTPS traffic is deep-inspected.
-
+```
 ca_cert = "./FGTDPI.cer"
 insecure = False
-
+```
 Behavior:
 	•	✅ DPI-inspected traffic succeeds
 	•	❌ Any non-DPI or bypassed traffic fails TLS validation
@@ -83,15 +85,15 @@ Option B — DPI Exceptions Present (Recommended)
 If any DPI exceptions or bypass rules exist, install the FortiGate CA into the OS trust store.
 
 Ubuntu 22.04 / 24.04:
-
+```
 sudo cp FGTDPI.cer /usr/local/share/ca-certificates/FGTDPI.crt
 sudo update-ca-certificates
-
+```
 Then configure:
-
-ca_cert = None
+```
+ca_cert = "./FGTDPI.cer"
 insecure = False
-
+```
 Behavior:
 	•	✅ DPI traffic succeeds
 	•	✅ Non-DPI / exception traffic succeeds
@@ -102,12 +104,20 @@ Behavior:
 Verifying DPI
 
 To confirm whether traffic is being deep-inspected, run:
-
+```
 openssl s_client -connect example.com:443 -servername example.com </dev/null 2>/dev/null \
 | openssl x509 -noout -issuer
+```
+Fortinet / FG… issuer → DPI active
+Public CA issuer → DPI bypass or exception
 
-	•	Fortinet / FG… issuer → DPI active
-	•	Public CA issuer → DPI bypass or exception
+No Exception in Profile or strict DPI:
+- openssl s_client -connect cnn.com:443 -servername cnn.com </dev/null 2>/dev/null | openssl x509 -noout -issuer
+issuer=C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, CN = FG121GTK23000612, emailAddress = support@fortinet.com
+
+Exception
+- openssl s_client -connect yahoo.com:443 -servername yaoo.com </dev/null 2>/dev/null | openssl x509 -noout -issuer
+issuer=C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert SHA2 High Assurance Server CA
 
 ⸻
 
