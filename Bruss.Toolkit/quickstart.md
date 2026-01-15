@@ -90,8 +90,9 @@ sudo cp FGTDPI.cer /usr/local/share/ca-certificates/FGTDPI.crt
 sudo update-ca-certificates
 ```
 Then configure:
+- do not reference cert
 ```
-ca_cert = "./FGTDPI.cer"
+ca_cert = None
 insecure = False
 ```
 Behavior:
