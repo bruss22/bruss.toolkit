@@ -49,7 +49,7 @@ def main():
     timeout_seconds = 6
 
     # DPI example w/Cert verify. using site bypasses could result in SSL errors:
-    #ca_cert = "/home/fortinet/toolkit/FGTDPI.cer"
+    #ca_cert = "./FGTDPI.cer"
     #insecure = False
     
     # Lab-only. Typically used for WF and APP Steering.:
