@@ -30,19 +30,23 @@ This means:
 Basic Usage
 	1.	Clone the repository:
 
-    git clone https://github.com/bruss22/bruss.toolkit.git
-    
-    cd <your-repo>
+- `git clone https://github.com/bruss22/bruss.toolkit.git`
+	
+- `cd bruss.toolkit/Bruss.Toolkit`
 
 Populate urllist.csv with the URLs you want to test:
 
+```csv
 https://www.google.com
 https://www.yahoo.com
 https://example.com
-
+```
 Run the toolkit:
 
     python3 toolkit.py
+	Press 1 to generate traffic: 1
+    Checking for urllist.csv
+    Loaded 31 URLs. Press Ctrl+C to stop.
 
 Traffic will be generated using HTTPS requests with certificate validation disabled.
 
