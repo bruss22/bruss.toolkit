@@ -116,8 +116,10 @@ Updating certificates in /etc/ssl/certs...
 
 verify DPI
 see issuer
+```
 openssl s_client -connect example.com:443 -servername example.com </dev/null 2>/dev/null \
 | openssl x509 -noout -issuer -subject
+```
 issuer=C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, CN = FG121GTK23000612, emailAddress = support@fortinet.com
 subject=CN = example.com
 ```
