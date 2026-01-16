@@ -113,12 +113,16 @@ openssl s_client -connect example.com:443 -servername example.com </dev/null 2>/
 - Public CA issuer → DPI bypass or exception
 
 No Exception in Profile or strict DPI:
-- openssl s_client -connect cnn.com:443 -servername cnn.com </dev/null 2>/dev/null | openssl x509 -noout -issuer
-issuer=C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, CN = FG121GTK23000612, emailAddress = support@fortinet.com
+```bash
+ openssl s_client -connect cnn.com:443 -servername cnn.com </dev/null 2>/dev/null | openssl x509 -noout -issuer
+```
+- issuer=C = US, ST = California, L = Sunnyvale, O = Fortinet, OU = Certificate Authority, CN = FG121GTK23000612, emailAddress = support@fortinet.com
 
 Exception
-- openssl s_client -connect yahoo.com:443 -servername yaoo.com </dev/null 2>/dev/null | openssl x509 -noout -issuer
-issuer=C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert SHA2 High Assurance Server CA
+```bash
+openssl s_client -connect yahoo.com:443 -servername yaoo.com </dev/null 2>/dev/null | openssl x509 -noout -issuer
+```
+- issuer=C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert SHA2 High Assurance Server CA
 
 ⸻
 
