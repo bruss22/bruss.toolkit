@@ -109,8 +109,8 @@ To confirm whether traffic is being deep-inspected, run:
 openssl s_client -connect example.com:443 -servername example.com </dev/null 2>/dev/null \
 | openssl x509 -noout -issuer
 ```
-Fortinet / FG… issuer → DPI active
-Public CA issuer → DPI bypass or exception
+- Fortinet / FG… issuer → DPI active
+- Public CA issuer → DPI bypass or exception
 
 No Exception in Profile or strict DPI:
 - openssl s_client -connect cnn.com:443 -servername cnn.com </dev/null 2>/dev/null | openssl x509 -noout -issuer
