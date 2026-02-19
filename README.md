@@ -30,6 +30,9 @@ The toolkit is intentionally simple and predictable, making it well-suited for *
 - Required Python package:
 	- pip install requests
 
+Fortigate notes:
+- set all web filter categories to monitor or block to endure logging
+- typically the default app control profile is fine for monitor. diag sys sdwan internet-service-app-ctrl-list requires an sdwan rule using an app as destination
 
 ⸻
 ```
