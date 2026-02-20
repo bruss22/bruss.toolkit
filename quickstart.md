@@ -104,6 +104,18 @@ Behavior:
 
 Verifying DPI
 
+Fortigate:
+
+config firewall ssl-ssh-profile
+    edit "toolkit.dpi"
+        set ssl-exemption-log enable
+        set ssl-server-cert-log enable
+        set ssl-handshake-log enable
+    next
+end
+<img width="436" height="527" alt="image" src="https://github.com/user-attachments/assets/a18013f6-caae-4645-82b3-00ad88dce4d9" />
+
+
 To confirm whether traffic is being deep-inspected, run:
 ```
 openssl s_client -connect example.com:443 -servername example.com </dev/null 2>/dev/null \
