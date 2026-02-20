@@ -75,9 +75,9 @@ Use this only if all HTTPS traffic is deep-inspected.
 ca_cert = "./FGTDPI.cer"
 insecure = False
 ```
-Behavior:
-	•	✅ DPI-inspected traffic succeeds
-	•	❌ Any non-DPI or bypassed traffic fails TLS validation
+Behavior:<br>
+	•	✅ DPI-inspected traffic succeeds<br>
+	•	❌ Any non-DPI or bypassed traffic fails TLS validation<br>
 
 ⸻
 
@@ -95,14 +95,23 @@ Then configure:
 ca_cert = None
 insecure = False
 ```
-Behavior:
-	•	✅ DPI traffic succeeds
-	•	✅ Non-DPI / exception traffic succeeds
-	•	✅ OpenSSL, curl, Python, and browsers behave consistently
+Behavior:<br>
+	•	✅ DPI traffic succeeds<br>
+	•	✅ Non-DPI / exception traffic succeeds<br>
+	•	✅ OpenSSL, curl, Python, and browsers behave consistently<br>
 
 ⸻
 
 Verifying DPI
+
+Fortigate DPI Security Profile:<br>
+- set ssl-exemption-log enable<br>
+- set ssl-server-cert-log enable<br>
+- set ssl-handshake-log enable(SSL Security Log example below) <br>
+
+- <img width="411" height="530" alt="image" src="https://github.com/user-attachments/assets/78f4ec9b-c5ce-461b-8359-719dfc9cd348" />
+
+
 
 To confirm whether traffic is being deep-inspected, run:
 ```
