@@ -2,9 +2,7 @@
 import csv
 import random
 import time
-
 from main import tkit
-
 
 def load_urls(path: str) -> list[str]:
     urls: list[str] = []
