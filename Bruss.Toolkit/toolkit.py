@@ -42,7 +42,7 @@ def main():
 
     print(f"Loaded {len(urls)} URLs. Press Ctrl+C to stop.")
 
-    # Optional knobs (hard-coded like your original; easy to make CLI args later)
+    # Optional knobs 
     sleep_seconds = 1
     timeout_seconds = 6
 
