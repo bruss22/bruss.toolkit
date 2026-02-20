@@ -19,11 +19,11 @@ This means:
 	•	HTTPS requests will succeed regardless of SSL inspection or certificate trust
 	•	No FortiGate CA is required initially
 
-✅ This mode is ideal for:
-	•	quick web filtering tests
-	•	application steering validation
-	•	initial connectivity checks
-	•	lab environments
+✅ This mode is ideal for:<br>
+	•	quick web filtering tests:<br>
+	•	application steering validation:<br>
+	•	initial connectivity checks:<br>
+	•	lab environments:<br>
 
 ⸻
 
