@@ -65,6 +65,13 @@ Step 1 — Export the FortiGate Deep-Inspection CA
 	•	Export the Deep-Inspection CA
 	•	Format: PEM / Base64
 	•	Replace or paste contents into filename: FGTDPI.cer
+	DPI Security Profile Logging
+	•	set ssl-exemption-log enable
+	•	set ssl-server-cert-log enable
+	•	set ssl-handshake-log enable
+	WebFilter Security Profile
+	•	All categories set to Monitor or block
+	
 ⸻
 
 Step 2 — Choose a Trust Mode
