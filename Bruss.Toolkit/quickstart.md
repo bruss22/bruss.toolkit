@@ -111,7 +111,16 @@ Fortigate DPI Security Profile:<br>
 
 - <img width="411" height="530" alt="image" src="https://github.com/user-attachments/assets/78f4ec9b-c5ce-461b-8359-719dfc9cd348" />
 
-
+verify 403 returned when not blocked by fortigate:<br>
+- 403 returned by server, remove url from urllist if desired.
+```curl
+curl -v --cacert FGTDPI.cer https://www.quora.com 
+```
+```
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+< HTTP/2 403 
+```
 
 To confirm whether traffic is being deep-inspected, run:
 ```
