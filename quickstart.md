@@ -75,9 +75,9 @@ Use this only if all HTTPS traffic is deep-inspected.
 ca_cert = "./FGTDPI.cer"
 insecure = False
 ```
-Behavior:
-	•	✅ DPI-inspected traffic succeeds
-	•	❌ Any non-DPI or bypassed traffic fails TLS validation
+Behavior:<br>
+	•	✅ DPI-inspected traffic succeeds<br>
+	•	❌ Any non-DPI or bypassed traffic fails TLS validation<br>
 
 ⸻
 
@@ -95,10 +95,10 @@ Then configure:
 ca_cert = None
 insecure = False
 ```
-Behavior:
-	•	✅ DPI traffic succeeds
-	•	✅ Non-DPI / exception traffic succeeds
-	•	✅ OpenSSL, curl, Python, and browsers behave consistently
+Behavior:<br>
+	•	✅ DPI traffic succeeds<br>
+	•	✅ Non-DPI / exception traffic succeeds<br>
+	•	✅ OpenSSL, curl, Python, and browsers behave consistently<br>
 
 ⸻
 
@@ -106,13 +106,13 @@ Verifying DPI
 
 Fortigate:
 
-config firewall ssl-ssh-profile
-    edit "toolkit.dpi"
-        set ssl-exemption-log enable
-        set ssl-server-cert-log enable
-        set ssl-handshake-log enable
-    next
-end
+config firewall ssl-ssh-profile<br>
+    edit "toolkit.dpi"<br>
+        set ssl-exemption-log enable<br>
+        set ssl-server-cert-log enable<br>
+        set ssl-handshake-log enable<br>
+    next<br>
+end<br>
 <img width="436" height="527" alt="image" src="https://github.com/user-attachments/assets/a18013f6-caae-4645-82b3-00ad88dce4d9" />
 
 
@@ -121,8 +121,8 @@ To confirm whether traffic is being deep-inspected, run:
 openssl s_client -connect example.com:443 -servername example.com </dev/null 2>/dev/null \
 | openssl x509 -noout -issuer
 ```
-- Fortinet / FG… issuer → DPI active
-- Public CA issuer → DPI bypass or exception
+- Fortinet / FG… issuer → DPI active<br>
+- Public CA issuer → DPI bypass or exception<br>
 
 No Exception in Profile or strict DPI:
 ```bash
