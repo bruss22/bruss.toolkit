@@ -31,7 +31,7 @@ The toolkit is intentionally simple and predictable, making it well-suited for *
 	- pip install requests
 
 Fortigate notes:
-- set all web filter categories to monitor or block to ensure logging os performed. Allow will not be logged.
+- set all web filter categories to monitor or block to ensure logging is performed. Allow will not be logged.
 - typically the default app control profile is fine for monitor.
 - SDWAN App-Cache: `diag sys sdwan internet-service-app-ctrl-list` requires an sdwan rule using an application as destination to populate. 
 
