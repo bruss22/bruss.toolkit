@@ -2,6 +2,7 @@
 import csv
 import random
 import time
+import argparse
 from main import tkit
 
 def load_urls(path: str) -> list[str]:
@@ -21,6 +22,20 @@ def load_urls(path: str) -> list[str]:
 
 
 def main():
+    parser = argparse.ArgumentParser(
+        description="Generate HTTP traffic from a list of URLs"
+    )
+
+    parser.add_argument(
+        "-i",
+        "--input",
+        default="urllist.csv",
+        help="Input CSV file containing URLs (default: urllist.csv)"
+    )
+
+    args = parser.parse_args()
+    input_file = args.input
+
     try:
         scope = int(input("Press 1 to generate traffic: ").strip() or "0")
     except ValueError:
@@ -30,12 +45,13 @@ def main():
         print("Exiting.")
         return
 
-    print("Checking for urllist.csv")
-    if not tkit.fileExists("urllist.csv"):
-        print("urllist.csv not found")
+    print(f"Checking for {input_file}")
+
+    if not tkit.fileExists(input_file):
+        print(f"{input_file} not found")
         return
 
-    urls = load_urls("urllist.csv")
+    urls = load_urls(input_file)
     if not urls:
         print("urllist.csv contains no usable URLs")
         return

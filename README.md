@@ -51,6 +51,9 @@ bruss.toolkit/
 
 URL List Configuration
 
+custom urllist can be reference with -i or --input arguments.
+ - i.e python3 toolkit.py -i myurllist.csv
+
 Populate urllist.csv with the destinations you want to generate traffic toward. I would reccomend seperate Application Steering(SDWAN) and Web FIlter lists.
 
 Example urllist.csv

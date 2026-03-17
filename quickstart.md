@@ -42,8 +42,10 @@ https://www.yahoo.com
 https://example.com
 ```
 Run the toolkit:
+-i or --input allows for selection of filename. No arguments defualt to urllist.csv
+i.e. python3 toolkit.py -i myinputfile.sv
 ```
-python3 toolkit.py
+python3 toolkit.py -i urllist.csv
 Press 1 to generate traffic: 1
 Checking for urllist.csv
 Loaded 31 URLs. Press Ctrl+C to stop.
